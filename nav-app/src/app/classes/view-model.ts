@@ -40,6 +40,7 @@ export class ViewModel {
     public filters: Filter;
     public layout: LayoutOptions = new LayoutOptions();
     public hideDisabled: boolean = false; // are disabled techniques hidden?
+    public hideNotHighlighted: boolean = false; // are not-hightlighted techniques hidden?
     public showTacticRowBackground: boolean = false;
     public tacticRowBackground: string = '#dddddd';
     public stickyToolbar = true;
@@ -855,15 +856,16 @@ export class ViewModel {
     }
 
     public isSubtechniqueEnabled(technique, techniqueVM, tactic): boolean {
-        if (techniqueVM.enabled) return true;
-        else if (technique.subtechniques.length > 0) {
+        let isHideNotHighlighted = (tvm) => this.hideNotHighlighted ? tvm.scoreColor : true;
+        let techniqueEnabled = techniqueVM.enabled && isHideNotHighlighted(techniqueVM);
+        if (technique.subtechniques.length > 0) {
             return technique.subtechniques.some((subtechnique) => {
                 let sub_platforms = new Set(subtechnique.platforms);
                 let filter = new Set(this.filters.platforms.selection);
                 let platforms = new Set(Array.from(filter.values()).filter((p) => sub_platforms.has(p)));
-                return this.getTechniqueVM(subtechnique, tactic).enabled && platforms.size > 0;
-            });
-        } else return false;
+                return ((tvm) => tvm.enabled && isHideNotHighlighted(tvm))(this.getTechniqueVM(subtechnique, tactic)) && platforms.size > 0;
+            }) || techniqueEnabled;
+        } else return techniqueEnabled;
     }
 
     /**

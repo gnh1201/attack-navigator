@@ -469,6 +469,18 @@ o888     88 o888   888o 8888o  88  88  888  88  888    888 o888   888o 888      
                 </div>
             </div>
 
+            <!-- show or hide not-highlighted techniques -->
+            <div *ngIf="configService.getFeature('toggle_hide_not_highlighted')" class="control-row-item">
+                <div
+                    class="control-row-button noselect"
+                    (click)="viewModel.hideNotHighlighted = !viewModel.hideNotHighlighted"
+                    matTooltipPosition="below"
+                    matTooltip="show/hide not-highlighted">
+                    <span *ngIf="viewModel.hideNotHighlighted" class="material-icons" alt="show not-highlighted">visibility_off</span>
+                    <span *ngIf="!viewModel.hideNotHighlighted" class="material-icons" alt="hide not-highlighted">visibility</span>
+                </div>
+            </div>
+
             <!-- expand all sub-techniques -->
             <div *ngIf="configService.getFeature('subtechniques')" class="control-row-item">
                 <div

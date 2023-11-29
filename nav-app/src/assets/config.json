@@ -248,6 +248,7 @@
             {"name": "sorting", "enabled": true, "description": "Disable to remove the sorting button from the interface."},
             {"name": "color_setup", "enabled": true, "description": "Disable to remove the color setup panel from interface, containing customization controls for scoring gradient and tactic row color."},
             {"name": "toggle_hide_disabled", "enabled": true, "description": "Disable to remove the hide disabled techniques button from the interface."},
+            {"name": "toggle_hide_not_highlighted", "enabled": true, "description": "Disable to remove the hide not-highlighted techniques button from the interface."},
             {"name": "layout_controls", "enabled": true, "description": "Disable to remove the ability to change the current matrix layout."},
             {"name": "legend", "enabled": true, "description": "Disable to remove the legend panel from the interface."}
         ]},
